@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 setup_django()
 
-from metadata.models import Sample, Population
+from envdata.models import Sample, Population
 
 def get_data(user, password):
     gc = gspread.login(user, password)
