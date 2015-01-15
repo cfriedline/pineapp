@@ -1,10 +1,12 @@
 import os, django, gspread
 import pandas as pd
 from dateutil.parser import parse
+from django.core.exceptions import ObjectDoesNotExist
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapp.settings")
 django.setup()
 
-from metadata.models import Sample
+from metadata.models import Sample, Population
 
 def get_data(user, password):
     gc = gspread.login(user, password)
@@ -18,10 +20,21 @@ def get_float(val):
     except ValueError as e:
         return None
 
+def get_population(pop_name)
+    try:
+        return Population.objects.get(name=pop_name)
+    except ObjectDoesNotExist as e:
+        p = Population(name=pop_name)
+        p.save()
+        return p
+
 def run_import(data):
     for i, row in data.iterrows():
-        print i
+        pop_name = "-".join(row['Sample'].split("-")[0:-1])
+        pop = get_population(pop_name)
+
         s = Sample(name=row['Sample'],
+                   population=pop,
                    sample_date=parse(row['Date']),
                    lat = get_float(row['Lat']),
                    lon = get_float(row['Long']),
@@ -36,6 +49,7 @@ def run_import(data):
                    bark4 = get_float(row['Bark4 (in)']))
 
         s.save()
+        print i
 
 if __name__ == '__main__':
     accounts = open("/Users/chris/.google").readlines()

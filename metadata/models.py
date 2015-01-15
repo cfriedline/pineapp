@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Sample(models.Model):
+    population = models.ForeignKey("Population", null=True, blank=True)
     name = models.CharField(max_length=20,blank=False,null=False,unique=True)
     sample_date = models.DateField(null=True,blank=False)
     lat = models.FloatField(blank=True,null=True)
@@ -16,6 +17,13 @@ class Sample(models.Model):
     bark2 = models.FloatField(blank=True,null=True)
     bark3 = models.FloatField(blank=True,null=True)
     bark4 = models.FloatField(blank=True,null=True)
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class Population(models.Model):
+    name = models.CharField(max_length=20,blank=False,null=False,unique=True)
     notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
