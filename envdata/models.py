@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 
 # Create your models here.
 
@@ -30,4 +31,6 @@ class Sample(models.Model):
     def __str__(self):
         return self.name
 
+class SampleAdmin(admin.ModelAdmin):
+    list_display = ['name', 'population']
 
