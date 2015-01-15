@@ -1,10 +1,10 @@
-import os, django, gspread
+import gspread
+from django_setup import setup_django
 import pandas as pd
 from dateutil.parser import parse
 from django.core.exceptions import ObjectDoesNotExist
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapp.settings")
-django.setup()
+setup_django()
 
 from metadata.models import Sample, Population
 
@@ -20,7 +20,7 @@ def get_float(val):
     except ValueError as e:
         return None
 
-def get_population(pop_name)
+def get_population(pop_name):
     try:
         return Population.objects.get(name=pop_name)
     except ObjectDoesNotExist as e:
