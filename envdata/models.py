@@ -38,7 +38,7 @@ class SampleInline(admin.StackedInline):
     extra=15
 
 class SampleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'population']
+    list_display = ['name', 'population', 'sample_date']
 
 class PopulationAdmin(admin.ModelAdmin):
     inlines = [SampleInline]
