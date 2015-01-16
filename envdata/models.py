@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.forms import ModelForm, TextInput
 
 # Create your models here.
 
@@ -31,6 +32,14 @@ class Sample(models.Model):
     def __str__(self):
         return self.name
 
+class SampleInline(admin.StackedInline):
+    model = Sample
+    max_num = 15
+    extra=15
+
 class SampleAdmin(admin.ModelAdmin):
     list_display = ['name', 'population']
 
+class PopulationAdmin(admin.ModelAdmin):
+    inlines = [SampleInline]
+    list_display = ['name','notes']
