@@ -6,3 +6,6 @@ update_db:
 
 runserver:
 	$D runserver
+
+runserver_public:
+	$D runserver 10.0.1.3:8000
