@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib import admin
-from django.forms import ModelForm, TextInput
-from suit.widgets import SuitDateWidget, NumberInput
+from django.forms import ModelForm
+from suit.widgets import SuitDateWidget
 
 # Create your models here.
 
 
 class Population(models.Model):
-    name = models.CharField(max_length=20, blank=False, 
+    name = models.CharField(max_length=20, blank=False,
                             null=False, unique=True)
     notes = models.TextField(blank=True, null=True)
 
@@ -17,7 +17,7 @@ class Population(models.Model):
 
 class Sample(models.Model):
     population = models.ForeignKey(Population, null=True, blank=True)
-    name = models.CharField(max_length=20, blank=False, null=False, 
+    name = models.CharField(max_length=20, blank=False, null=False,
                             unique=True)
     sample_date = models.DateField(null=True, blank=False)
     lat = models.FloatField(blank=True, null=True)
@@ -59,5 +59,4 @@ class SampleAdmin(admin.ModelAdmin):
 
 class PopulationAdmin(admin.ModelAdmin):
     inlines = [SampleInline]
-    list_display = ['name','notes']
-    
+    list_display = ['name', 'notes']
