@@ -1,11 +1,12 @@
 D=python manage.py
 
 update_db:
-	$D makemigrations
+	export DB_PORT_5432_TCP_ADDR=localhost && \
+	$D makemigrations && \
 	$D migrate
 
 runserver:
-	$D runserver
+	export DB_PORT_5432_TCP_ADDR=localhost && $(D) runserver
 
 runserver_public:
-	$D runserver 10.0.1.3:8000
+	export DB_PORT_5432_TCP_ADDR=localhost && $D runserver 10.0.1.3:8000
