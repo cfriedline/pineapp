@@ -13,4 +13,4 @@ v1_api.register(population_resource)
 urlpatterns = patterns('', url(r'^grappelli/', include('grappelli.urls')),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^$', include(admin.site.urls)),
-                       url(r'^api/$', include(v1_api.urls)))
+                       url(r'^api/', include(v1_api.urls)))
