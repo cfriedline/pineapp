@@ -8,6 +8,14 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+path = '/Users/chris/web/pineapp/pineapp'
+if not path in sys.path:
+    sys.path.append(path)
+
+print sys.path
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapp.settings")
 
 from django.core.wsgi import get_wsgi_application
