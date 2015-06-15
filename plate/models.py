@@ -11,7 +11,6 @@ class Plate(models.Model):
         return self.name
 
 class PlateCell(models.Model):
-    plate = models.ForeignKey(Plate, blank=False, null=False)
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
     barcode = models.ForeignKey(Barcode, blank=True, null=True)
@@ -23,4 +22,4 @@ class PlateAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 class PlateCellAdmin(admin.ModelAdmin):
-    list_display = ['plate', 'row', 'col']
+    list_display = ['row', 'col', 'barcode']
