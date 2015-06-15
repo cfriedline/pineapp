@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.forms import ModelForm
 from suit.widgets import SuitDateWidget
 from freezerbox.models import FreezerBoxCell
+from plate.models import PlateCell
 from barcode.models import Barcode
 
 # Create your models here.
@@ -35,7 +36,7 @@ class Sample(models.Model):
     bark4 = models.FloatField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     freezer = models.ForeignKey(FreezerBoxCell, blank=True, null=True)
-    barcode = models.ForeignKey(Barcode, blank=True, null=True)
+    plate = models.ForeignKey(PlateCell, blank=True, null=True)
 
     def __str__(self):
         return self.name
