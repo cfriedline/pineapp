@@ -8,7 +8,7 @@ class Barcode(models.Model):
     seq = models.CharField(blank=True, null=True, unique=True, max_length=100)
 
     def __str__(self):
-        return self.name
+        return "%s (%s...)" % (self.name, self.seq[0:15])
 
 
 class BarcodeAdmin(admin.ModelAdmin):

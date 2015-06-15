@@ -10,16 +10,22 @@ class Plate(models.Model):
     def __str__(self):
         return self.name
 
+
 class PlateCell(models.Model):
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
     barcode = models.ForeignKey(Barcode, blank=True, null=True)
 
+    class Meta:
+        unique_together = (("row", "col"),)
+
     def __str__(self):
-        return "%s: %s/%d" % (self.plate, self.row, int(self.col))
+        return "%s/%d" % (self.row, int(self.col))
+
 
 class PlateAdmin(admin.ModelAdmin):
     list_display = ['name']
+
 
 class PlateCellAdmin(admin.ModelAdmin):
     list_display = ['row', 'col', 'barcode']
