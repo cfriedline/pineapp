@@ -5,6 +5,7 @@ from suit.widgets import SuitDateWidget
 from freezerbox.models import FreezerBoxCell
 from plate.models import PlateCell
 from barcode.models import Barcode
+from django.contrib.gis.geos import Point
 
 # Create your models here.
 
@@ -40,6 +41,17 @@ class Sample(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def geom(self):
+        if self.lon > 0:
+            print "bad value for %s" % self.name
+            self.lon = -self.lon
+        return Point(self.lon, self.lat, srid=4326)
+
+    @property
+    def species(self):
+        return self.name[0]
 
 
 class SampleForm(ModelForm):

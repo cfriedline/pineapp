@@ -1,0 +1,78 @@
+{% load leaflet_tags %}
+
+<head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <script type="text/javascript" src="{{ STATIC_ROOT }}/static/js/jquery.js"></script>
+
+    <style>
+
+        .leaflet-container {
+            /* all maps */
+            width: 800px;
+            height: 600px;
+        }
+
+        #specialbigmap {
+            height: 800px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<h1>Sample locations</h1>
+
+{% leaflet_map "main" callback="main_map_init" %}
+
+
+<script type="text/javascript">
+
+    function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
+
+    function getColor(d) {
+        return d === 'T' ? '#0000FF' : d === 'G' ? '#FF9900' :
+                d === 'E' ? '#FF33CC' :
+                        d === 'P' ? '#FFFF00' : '#ffffff';
+    }
+
+
+    function main_map_init(map, options) {
+
+        var dataurl = '{% url "data" %}';
+        // Download GeoJSON via Ajax
+        $.getJSON(dataurl, function (data) {
+            var layer = L.geoJson(data, {
+                onEachFeature: onEachFeature,
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, {
+                        fillColor: getColor(feature.properties.species),
+                        weight: 0.2,
+                        color: "#000000",
+                        opacity: 1.0
+                    });
+                },
+                riseOnHover: true,
+                riseOffset: 2000
+            });
+            layer.addTo(map);
+            layer.bringToFront();
+        });
+    }
+</script>
+
+
+<p>
+    Number of populations: {{ pops|length }}
+    <br>
+    Number of samples: {{ samples|length }}
+
+</p>
+
+</body>
