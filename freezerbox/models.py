@@ -8,6 +8,13 @@ from suit.widgets import SuitDateWidget
 class FreezerBox(models.Model):
     name = models.IntegerField(blank=False, null=False, unique=True)
     notes = models.TextField(blank=True, null=True)
+    STOCK = "STK"
+    LIBRARY = "LIB"
+    KIND_CHOICES = (
+        (STOCK, "Stock"),
+        (LIBRARY, "Library")
+    )
+    kind = models.CharField(max_length=3, choices=KIND_CHOICES, default=STOCK)
 
     def __str__(self):
         return "Box %d" % self.name
