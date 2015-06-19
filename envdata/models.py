@@ -36,7 +36,8 @@ class Sample(models.Model):
     bark3 = models.FloatField(blank=True, null=True)
     bark4 = models.FloatField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    freezer_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True)
+    stock_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True, related_name="stock")
+    library_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True, related_name="library")
     plate_cell = models.ForeignKey(PlateCell, blank=True, null=True)
 
     def __str__(self):
