@@ -6,7 +6,7 @@ from suit.widgets import SuitDateWidget
 # Create your models here.
 
 class FreezerBox(models.Model):
-    name = models.IntegerField(blank=False, null=False, unique=True)
+    name = models.CharField(max_length=10, blank=False, null=False, unique=True)
     notes = models.TextField(blank=True, null=True)
     STOCK = "STK"
     LIBRARY = "LIB"
@@ -17,7 +17,7 @@ class FreezerBox(models.Model):
     kind = models.CharField(max_length=3, choices=KIND_CHOICES, default=STOCK)
 
     def __str__(self):
-        return "Box %d" % self.name
+        return self.name
 
 
 class FreezerBoxCell(models.Model):
@@ -27,6 +27,9 @@ class FreezerBoxCell(models.Model):
 
     def __str__(self):
         return "%s: %s/%d" % (self.box, self.row, self.col)
+
+    class Meta:
+        unique_together = (("box", "row", "col"),)
 
 
 class FreezerBoxAdmin(admin.ModelAdmin):

@@ -12,12 +12,13 @@ class Plate(models.Model):
 
 
 class PlateCell(models.Model):
+    plate = models.ForeignKey(Plate, null=True, blank=True)
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
     barcode = models.ForeignKey(Barcode, blank=True, null=True)
 
     class Meta:
-        unique_together = (("row", "col"),)
+        unique_together = (("plate", "row", "col"),)
 
     def __str__(self):
         return "%s/%d" % (self.row, int(self.col))
@@ -28,4 +29,4 @@ class PlateAdmin(admin.ModelAdmin):
 
 
 class PlateCellAdmin(admin.ModelAdmin):
-    list_display = ['row', 'col', 'barcode']
+    list_display = ['plate', 'row', 'col', 'barcode']
