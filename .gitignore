@@ -6,4 +6,4 @@ static
 admin
 pineapp/admin
 test*
-
+*.txt
