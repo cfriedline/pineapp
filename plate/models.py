@@ -6,6 +6,7 @@ from barcode.models import Barcode
 
 class Plate(models.Model):
     name = models.CharField(blank=False, null=False, unique=True, max_length=50)
+    full = models.BooleanField(blank=False, null=False, default=False)
 
     def __str__(self):
         return self.name
@@ -24,9 +25,17 @@ class PlateCell(models.Model):
         return "%s/%d" % (self.row, int(self.col))
 
 
+class PlateCellInline(admin.TabularInline):
+    model = PlateCell
+    max_num = 96
+
 class PlateAdmin(admin.ModelAdmin):
+    inlines = [PlateCellInline]
     list_display = ['name']
 
 
+
 class PlateCellAdmin(admin.ModelAdmin):
+    inlines = []
     list_display = ['plate', 'row', 'col', 'barcode']
+
