@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from barcode.models import Barcode
 
+
 # Create your models here.
 
 class Plate(models.Model):
@@ -31,8 +32,7 @@ class PlateCellInline(admin.TabularInline):
 
 class PlateAdmin(admin.ModelAdmin):
     inlines = [PlateCellInline]
-    list_display = ['name']
-
+    list_display = ['name', 'full']
 
 
 class PlateCellAdmin(admin.ModelAdmin):
