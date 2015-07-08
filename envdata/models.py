@@ -41,6 +41,7 @@ class Sample(models.Model):
     library_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True, related_name="library",
                                      on_delete=models.SET_NULL)
     plate_cell = models.ForeignKey(PlateCell, blank=True, null=True, on_delete=models.SET_NULL)
+    usable = models.BooleanField(blank=False, null=False, default=True)
 
     def __str__(self):
         return self.name
