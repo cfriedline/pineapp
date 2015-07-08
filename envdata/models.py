@@ -56,6 +56,12 @@ class Sample(models.Model):
     def species(self):
         return self.name[0]
 
+    def boxes(self):
+        return "%s, stock=%s, library=%s, plate=%s" % (self.name,
+                                                       self.stock_cell,
+                                                       self.library_cell,
+                                                       self.plate_cell)
+
 
 class SampleForm(ModelForm):
     class Meta:
