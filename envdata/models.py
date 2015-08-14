@@ -6,6 +6,7 @@ from freezerbox.models import FreezerBoxCell
 from plate.models import PlateCell
 from barcode.models import Barcode
 from django.contrib.gis.geos import Point
+import numpy as np
 
 # Create your models here.
 
@@ -56,6 +57,27 @@ class Sample(models.Model):
     @property
     def species(self):
         return self.name[0]
+
+    @property
+    def bark_avg_mm(self):
+        factor = 25.4
+        return np.mean([self.bark1, self.bark2, self.bark3, self.bark4]) * factor
+
+    @property
+    def height_calc(self):
+        if self.height:
+            return self.height
+
+        if self.angle_low and self.angle_high:
+            a1 = np.radians(self.angle_low)
+            a2 = np.radians(self.angle_high)
+            return (np.tan(a1)*self.angle_distance)+(np.tan(a2)*self.angle_distance)
+
+        if self.angle_high and not self.angle_low:
+            a1 = np.radians(self.angle_high)
+            return np.tan(a1)*self.angle_distance
+
+        return np.nan
 
     def boxes(self):
         return "%s, stock=%s, library=%s, plate=%s" % (self.name,
