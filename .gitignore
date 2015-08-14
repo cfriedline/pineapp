@@ -7,3 +7,4 @@ admin
 pineapp/admin
 test*
 *.txt
+*.xls
