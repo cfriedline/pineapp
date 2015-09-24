@@ -61,7 +61,9 @@ class Sample(models.Model):
     @property
     def bark_avg_mm(self):
         factor = 25.4
-        return np.mean([self.bark1, self.bark2, self.bark3, self.bark4]) * factor
+        if self.bark1 and self.bark2 and self.bark3 and self.bark4:
+            return np.mean([self.bark1, self.bark2, self.bark3, self.bark4]) * factor
+        return None
 
     @property
     def height_calc(self):
