@@ -6,8 +6,12 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
 
+    # dependencies = [
+    #     ('freezerbox', '0004_freezerbox_kind'),
+    #     ('envdata', '0007_auto_20150615_1612'),
+    # ]
+    #
     dependencies = [
-        ('freezerbox', '0004_freezerbox_kind'),
         ('envdata', '0007_auto_20150615_1612'),
     ]
 
