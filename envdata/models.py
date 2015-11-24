@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib import admin
 from django.forms import ModelForm
 from suit.widgets import SuitDateWidget
-from freezerbox.models import FreezerBoxCell
+from library.models import LibraryCell
+from stock.models import StockCell
 from plate.models import PlateCell
 from barcode.models import Barcode
 from django.contrib.gis.geos import Point
@@ -37,10 +38,9 @@ class Sample(models.Model):
     bark3 = models.FloatField(blank=True, null=True)
     bark4 = models.FloatField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    stock_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True, related_name="stock",
-                                   on_delete=models.SET_NULL)
-    library_cell = models.ForeignKey(FreezerBoxCell, blank=True, null=True, related_name="library",
-                                     on_delete=models.SET_NULL)
+
+    stock_cell = models.ForeignKey(StockCell, blank=True, null=True, on_delete=models.SET_NULL)
+    library_cell = models.ForeignKey(LibraryCell, blank=True, null=True, on_delete=models.SET_NULL)
     plate_cell = models.ForeignKey(PlateCell, blank=True, null=True, on_delete=models.SET_NULL)
     usable = models.BooleanField(blank=False, null=False, default=True)
 
@@ -106,8 +106,10 @@ class SampleInline(admin.StackedInline):
 class SampleAdmin(admin.ModelAdmin):
     list_display = ['name', 'population', 'sample_date']
     form = SampleForm
+    list_per_page = 20
 
 
 class PopulationAdmin(admin.ModelAdmin):
     inlines = [SampleInline]
+    list_per_page=20
     list_display = ['name', 'notes']
