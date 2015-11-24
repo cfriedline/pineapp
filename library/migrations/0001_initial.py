@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Library',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=50)),
+                ('full', models.BooleanField(default=False)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='LibraryCell',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('row', models.CharField(max_length=1)),
+                ('col', models.IntegerField()),
+                ('stock', models.ForeignKey(blank=True, to='library.Library', null=True)),
+            ],
+        ),
+        migrations.AlterUniqueTogether(
+            name='librarycell',
+            unique_together=set([('stock', 'row', 'col')]),
+        ),
+    ]
