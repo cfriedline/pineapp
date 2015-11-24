@@ -91,7 +91,7 @@ class Sample(models.Model):
 class SampleForm(ModelForm):
     class Meta:
         model = Sample
-        exclude = []
+        exclude = ['stock_cell', 'library_cell', 'plate_cell']
         widgets = {
             'sample_date': SuitDateWidget,
         }
@@ -99,6 +99,7 @@ class SampleForm(ModelForm):
 
 class SampleInline(admin.StackedInline):
     model = Sample
+    exclude = ['stock_cell', 'library_cell', 'plate_cell']
     max_num = 15
     extra = 15
 
