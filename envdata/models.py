@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib import admin
-from django.forms import ModelForm
+from django.forms import ModelForm, CharField
 from suit.widgets import SuitDateWidget
 from library.models import LibraryCell
 from stock.models import StockCell
 from plate.models import PlateCell
 from barcode.models import Barcode
 from django.contrib.gis.geos import Point
+from django import forms
+from grappelli_filters import SearchFilter
 import numpy as np
 
 # Create your models here.
@@ -42,7 +44,20 @@ class Sample(models.Model):
     stock_cell = models.ForeignKey(StockCell, blank=True, null=True, on_delete=models.SET_NULL)
     library_cell = models.ForeignKey(LibraryCell, blank=True, null=True, on_delete=models.SET_NULL)
     plate_cell = models.ForeignKey(PlateCell, blank=True, null=True, on_delete=models.SET_NULL)
+
     usable = models.BooleanField(blank=False, null=False, default=True)
+
+    @property
+    def stock(self):
+        if self.stock_cell:
+            return "%s/%s/%s" % (self.stock_cell.box.name, self.stock_cell.row, self.stock_cell.col)
+        return None
+
+    @property
+    def library(self):
+        if self.library_cell:
+            return "%s/%s/%s" % (self.library_cell.box.name, self.library_cell.row, self.library_cell.col)
+        return None
 
     def __str__(self):
         return self.name
@@ -92,9 +107,12 @@ class SampleForm(ModelForm):
     class Meta:
         model = Sample
         exclude = ['stock_cell', 'library_cell', 'plate_cell']
+        # exclude = []
         widgets = {
             'sample_date': SuitDateWidget,
         }
+        readonly_fields = ['stock', 'library']
+
 
 
 class SampleInline(admin.StackedInline):
@@ -102,12 +120,15 @@ class SampleInline(admin.StackedInline):
     exclude = ['stock_cell', 'library_cell', 'plate_cell']
     max_num = 15
     extra = 15
+    readonly_fields = ['stock', 'library']
 
 
 class SampleAdmin(admin.ModelAdmin):
     list_display = ['name', 'population', 'sample_date']
+    search_fields = ['name', 'stock_cell__box__name', 'library_cell__box__name']
     form = SampleForm
     list_per_page = 20
+
 
 
 class PopulationAdmin(admin.ModelAdmin):
