@@ -135,3 +135,4 @@ class PopulationAdmin(admin.ModelAdmin):
     inlines = [SampleInline]
     list_per_page=20
     list_display = ['name', 'notes']
+    search_fields = ['name']
