@@ -11,3 +11,4 @@ test*
 *.sav
 *.csv
 *.pdf
+!requirements.txt
