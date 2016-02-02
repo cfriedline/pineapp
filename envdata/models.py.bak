@@ -65,7 +65,7 @@ class Sample(models.Model):
     @property
     def geom(self):
         if self.lon > 0:
-            print("bad value for %s" % self.name)
+            print "bad value for %s" % self.name
             self.lon = -self.lon
         return Point(self.lon, self.lat, srid=4326)
 

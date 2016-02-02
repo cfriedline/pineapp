@@ -49,7 +49,7 @@ def run_import(data):
                    bark4 = get_float(row['Bark4 (in)']))
 
         s.save()
-        print(i)
+        print i
 
 if __name__ == '__main__':
     accounts = open("/Users/chris/.google").readlines()

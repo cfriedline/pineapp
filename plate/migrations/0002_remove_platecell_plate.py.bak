@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 
 from django.db import models, migrations
 
@@ -7,12 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('plate', '0002_remove_platecell_plate'),
+        ('plate', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterUniqueTogether(
-            name='platecell',
-            unique_together=set([('row', 'col')]),
+        migrations.RemoveField(
+            model_name='platecell',
+            name='plate',
         ),
     ]

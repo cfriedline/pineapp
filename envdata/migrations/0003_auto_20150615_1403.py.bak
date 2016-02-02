@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 
 from django.db import models, migrations
 
@@ -7,20 +7,20 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('envdata', '0001_initial'),
+        ('envdata', '0002_auto_20150615_1343'),
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RemoveField(
             model_name='sample',
             name='freezer_box',
-            field=models.TextField(null=True, blank=True),
-            preserve_default=True,
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='sample',
+            name='freezer_box_col',
+        ),
+        migrations.RemoveField(
             model_name='sample',
             name='freezer_box_row',
-            field=models.TextField(null=True, blank=True),
-            preserve_default=True,
         ),
     ]

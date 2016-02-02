@@ -23,6 +23,9 @@ class StockCell(models.Model):
     def __str__(self):
         return "%s/%d" % (self.row, int(self.col))
 
+    def sample(self):
+        return self.sample_set.all()[0]
+
 
 class StockCellInline(admin.TabularInline):
     model = StockCell
@@ -35,5 +38,5 @@ class StockAdmin(admin.ModelAdmin):
 
 class StockCellAdmin(admin.ModelAdmin):
     inlines = []
-    list_display = ['box', 'row', 'col']
+    list_display = ['box', 'row', 'col', 'sample']
 
