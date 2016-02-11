@@ -88,11 +88,11 @@ class Sample(models.Model):
         if self.angle_low and self.angle_high:
             a1 = np.radians(self.angle_low)
             a2 = np.radians(self.angle_high)
-            return (np.tan(a1)*self.angle_distance)+(np.tan(a2)*self.angle_distance)
+            return (np.tan(a1) * self.angle_distance) + (np.tan(a2) * self.angle_distance)
 
         if self.angle_high and not self.angle_low:
             a1 = np.radians(self.angle_high)
-            return np.tan(a1)*self.angle_distance
+            return np.tan(a1) * self.angle_distance
 
         return np.nan
 
@@ -114,7 +114,6 @@ class SampleForm(ModelForm):
         readonly_fields = ['stock', 'library']
 
 
-
 class SampleInline(admin.StackedInline):
     model = Sample
     exclude = ['stock_cell', 'library_cell', 'plate_cell']
@@ -130,9 +129,8 @@ class SampleAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
-
 class PopulationAdmin(admin.ModelAdmin):
     inlines = [SampleInline]
-    list_per_page=20
+    list_per_page = 20
     list_display = ['name', 'notes']
     search_fields = ['name']
