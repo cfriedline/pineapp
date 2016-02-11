@@ -23,12 +23,13 @@ class PlateCell(models.Model):
         unique_together = (("plate", "row", "col"),)
 
     def __str__(self):
-        return "%s/%d" % (self.row, int(self.col))
+        return "%s/%s/%d" % (self.plate.name, self.row, int(self.col))
 
 
 class PlateCellInline(admin.TabularInline):
     model = PlateCell
     max_num = 96
+
 
 class PlateAdmin(admin.ModelAdmin):
     inlines = [PlateCellInline]
@@ -38,4 +39,3 @@ class PlateAdmin(admin.ModelAdmin):
 class PlateCellAdmin(admin.ModelAdmin):
     inlines = []
     list_display = ['plate', 'row', 'col', 'barcode']
-
