@@ -14,3 +14,6 @@ runserver_public:
 collect_static:
 	export DB_PORT_5432_TCP_ADDR=localhost && \
 	$(D) collectstatic
+
+backup_db:
+	pg_dump pineapp > pineapp.bak
