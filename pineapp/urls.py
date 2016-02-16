@@ -13,7 +13,7 @@ v1_api.register(population_resource)
 
 
 urlpatterns = [url('^admin/', include(admin.site.urls)),
-               url('^$', include(admin.site.urls)),
+               url('', include(admin.site.urls)),
                url('^api/', include(v1_api.urls)),
                url('^www/', views.index),
                ]
