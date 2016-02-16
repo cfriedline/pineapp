@@ -1,12 +1,9 @@
-django==1.8.9
+django==1.9.2
 django-leaflet
 django-tastypie
-django-grappelli
-django-grappelli-filters
 django-jquery
 django-reversion
 django-extensions
 psycopg2
-django-suit
 django-geojson
 django-mapit
