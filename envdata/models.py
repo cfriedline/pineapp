@@ -59,6 +59,12 @@ class Sample(models.Model):
             return "%s/%s/%s" % (self.library_cell.box.name, self.library_cell.row, self.library_cell.col)
         return None
 
+    @property
+    def plate(self):
+        if self.plate_cell:
+            return "%s/%s/%s" % (self.plate_cell.plate.name, self.plate_cell.row, self.plate_cell.col)
+        return None
+
     def __str__(self):
         return self.name
 
@@ -123,8 +129,8 @@ class SampleInline(admin.StackedInline):
 
 
 class SampleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'population', 'sample_date', 'stock', 'library']
-    search_fields = ['name', 'stock_cell__box__name', 'library_cell__box__name']
+    list_display = ['name', 'population', 'sample_date', 'stock', 'library', 'plate']
+    search_fields = ['name', 'stock_cell__box__name', 'library_cell__box__name', 'plate_cell__plate__name']
     form = SampleForm
     list_per_page = 20
 
