@@ -17,16 +17,17 @@ class LibraryCell(models.Model):
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
 
-    class Meta:
+    class Meta(object):
         unique_together = (("box", "row", "col"),)
 
     def __str__(self):
-        return "%s/%d" % (self.row, int(self.col))
+        return "%s/%s/%d" % (self.box.name, self.row, int(self.col))
 
 
 class LibraryCellInline(admin.TabularInline):
     model = LibraryCell
     max_num = 96
+
 
 class LibraryAdmin(admin.ModelAdmin):
     inlines = [LibraryCellInline]
@@ -36,4 +37,3 @@ class LibraryAdmin(admin.ModelAdmin):
 class LibraryCellAdmin(admin.ModelAdmin):
     inlines = []
     list_display = ['box', 'row', 'col']
-
