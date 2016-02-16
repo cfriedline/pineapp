@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from envdata.api import SampleResource, PopulationResource
 from tastypie.api import Api
-import www
+from www import views
 
 sample_resource = SampleResource()
 population_resource = PopulationResource()
@@ -11,9 +11,9 @@ v1_api = Api(api_name='v1')
 v1_api.register(sample_resource)
 v1_api.register(population_resource)
 
-urlpatterns = patterns('', url(r'^grappelli/', include('grappelli.urls')),
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^$', include('www.urls')),
-                       url(r'^api/', include(v1_api.urls)),
-                       url(r'^www/', include('www.urls'))
-                       )
+
+urlpatterns = [url('^admin/', include(admin.site.urls)),
+               url('^$', views.index),
+               url('^api/', include(v1_api.urls)),
+               url('^www/', views.index),
+               ]
