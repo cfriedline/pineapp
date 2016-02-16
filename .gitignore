@@ -2,9 +2,6 @@
 .idea
 settings.py
 *.ipynb
-static
-admin
-pineapp/admin
 test*
 *.txt
 *.xls
