@@ -7,3 +7,5 @@ django-extensions
 psycopg2
 django-geojson
 django-mapit
+django-suit
+django-grappelli-filters
