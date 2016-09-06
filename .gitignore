@@ -10,3 +10,4 @@ test*
 *.pdf
 !requirements.txt
 *.bak
+*.json
