@@ -11,3 +11,8 @@ test*
 !requirements.txt
 *.bak
 *.json
+*.dbf
+*.prj
+*.qix
+*.shp
+*.shx
