@@ -11,7 +11,7 @@ import os
 import sys
 from django.core.wsgi import get_wsgi_application
 
-path = '/Users/chris/web/pineapp/pineapp'
+path = '/Users/chris/src/pineapp/pineapp'
 
 if path not in sys.path:
     sys.path.append(path)
