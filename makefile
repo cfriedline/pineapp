@@ -9,7 +9,7 @@ runserver:
 	export DB_PORT_5432_TCP_ADDR=localhost && $(D) runserver
 
 runserver_public:
-	export DB_PORT_5432_TCP_ADDR=localhost && $D runserver 10.0.1.3:8000
+	export DB_PORT_5432_TCP_ADDR=localhost && $D runserver 0.0.0.0:8000
 
 collect_static:
 	export DB_PORT_5432_TCP_ADDR=localhost && \
