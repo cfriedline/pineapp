@@ -13,7 +13,7 @@ class Stock(models.Model):
 
 
 class StockCell(models.Model):
-    box = models.ForeignKey(Stock, null=True, blank=True)
+    box = models.ForeignKey(Stock, null=True, blank=True, on_delete=models.PROTECT)
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
 

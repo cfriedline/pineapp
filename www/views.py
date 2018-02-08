@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.contrib.gis.geos import Point
 from envdata.models import Population, Sample
-from django.core.urlresolvers import reverse
 
 
 def index(request):

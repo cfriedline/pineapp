@@ -24,7 +24,7 @@ class Population(models.Model):
 
 
 class Sample(models.Model):
-    population = models.ForeignKey(Population, null=True, blank=True)
+    population = models.ForeignKey(Population, null=True, blank=True, on_delete=models.PROTECT)
     name = models.CharField(max_length=20, blank=False, null=False,
                             unique=True)
     sample_date = models.DateField(null=True, blank=False)

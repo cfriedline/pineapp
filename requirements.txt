@@ -12,3 +12,5 @@ django-grappelli-filters
 notebook
 ipython
 autopep8
+flake8
+yapf

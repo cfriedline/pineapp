@@ -45,7 +45,7 @@
 
     function main_map_init(map, options) {
 
-        var dataurl = '{% url "data" %}';
+        var dataurl = "{% url 'data' %}";
         // Download GeoJSON via Ajax
         $.getJSON(dataurl, function (data) {
             var layer = L.geoJson(data, {

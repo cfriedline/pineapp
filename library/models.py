@@ -13,7 +13,7 @@ class Library(models.Model):
 
 
 class LibraryCell(models.Model):
-    box = models.ForeignKey(Library, null=True, blank=True)
+    box = models.ForeignKey(Library, null=True, blank=True, on_delete=models.PROTECT)
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
 

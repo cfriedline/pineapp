@@ -14,10 +14,10 @@ class Plate(models.Model):
 
 
 class PlateCell(models.Model):
-    plate = models.ForeignKey(Plate, null=True, blank=True)
+    plate = models.ForeignKey(Plate, null=True, blank=True, on_delete=models.PROTECT)
     row = models.CharField(blank=False, null=False, max_length=1)
     col = models.IntegerField(blank=False, null=False)
-    barcode = models.ForeignKey(Barcode, blank=True, null=True)
+    barcode = models.ForeignKey(Barcode, blank=True, null=True, on_delete=models.PROTECT)
 
     class Meta:
         unique_together = (("plate", "row", "col"),)
