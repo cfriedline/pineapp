@@ -11,3 +11,4 @@ django-suit
 django-grappelli-filters
 notebook
 ipython
+autopep8
