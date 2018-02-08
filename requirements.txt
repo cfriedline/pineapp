@@ -10,3 +10,4 @@ django-mapit
 django-suit
 django-grappelli-filters
 notebook
+ipythonn
