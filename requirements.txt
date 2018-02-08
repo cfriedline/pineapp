@@ -9,3 +9,4 @@ django-geojson
 django-mapit
 django-suit
 django-grappelli-filters
+notebook
