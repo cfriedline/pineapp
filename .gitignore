@@ -17,3 +17,4 @@ test*
 *.shp
 *.shx
 *.backup
+.ipynb_checkpoints/
